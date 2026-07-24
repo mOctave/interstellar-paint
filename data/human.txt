@@ -1,0 +1,272 @@
+# Interstellar Paint: A reswizzling plugin for Endless Sky.
+# Copyright (c) 2026 by mOctave
+#
+# This program is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+# This file contains the ordinary painting missions offered in human space
+
+mission "Interstellar Paint: Pirate World"
+	name "Change Paint"
+	description `Walking through the spaceport, you're surprised to find a franchised Galactic Paint Supply store. If you'd like to visit, press "Accept."`
+	color selected "paint job: selected"
+	color unselected "paint job: unselected"
+	color unavailable "paint job: unavailable"
+	job
+	repeat
+	source
+		government "Pirate" "Independent"
+	to offer
+		or
+			not "chosen sides"
+			has "main plot completed"
+	to fail
+		has "Fail Paint Change"
+	on fail
+		clear "Fail Paint Change"
+	on accept
+		set "Fail Paint Change"
+		conversation
+			`The paint supplier is located in a seedy back room, lit by a single flickering light bulb. Behind the counter, a decrepit old man - or possibly orangutan - sits, flipping through the kind of magazine typically confiscated by the parents of teenage boys. Hearing you come in, he clears his throat and stares at you with bloodshot eyes.`
+			`	"Whaddaya want, kid?" he growls.`
+			choice
+				`	"I want a fresh coat of paint."`
+				`	"Er... nothing, sorry."`
+					goto scat
+
+			
+			`	"Lesee now, we've got classic blue, we've got three shades of red, and we've got summa that special green-brown stuff rookie mercs like so much."`
+			`	Behind him, the six choices on offer are proudly labelled as Merchant Traditional, Pirate Traditional, Pure Red, Faded Red, and Dirty Green.`
+			choice
+				`	"Can I see the Merchant Traditional?"`
+					goto blue
+				`	"Can I see the Pirate Traditional?"`
+					goto pirate
+				`	"Can I see the Pure Red?"`
+					goto pure
+				`	"Can I see the Faded Red?"`
+					goto faded
+				`	"Can I see the Dirty Green?"`
+					goto green
+			
+
+			label blue
+			`	A can of blue paint lands on the counter in front of you with a thump. "Ereyago, kid. Basic boring blue for a basic boring - ah, but I shouldn't swear in front of such a delicate little merchant tourist, should I?"`
+			scene "paint/Merchant"
+			`	"This'll cost you 13000 credits total. Deal?"`
+			choice
+				`	"Deal."`
+					to display
+						credits >= 13000
+				`	"I'll pay 10000 credits, no more."`
+					to display
+						credits >= 10000
+					goto bargain_blue
+				`	"Can I see the Pirate Traditional instead?"`
+					goto pirate
+				`	"Can I see the Pure Red instead?"`
+					goto pure
+				`	"Can I see the Faded Red instead?"`
+					goto faded
+				`	"Can I see the Dirty Green instead?"`
+					goto green
+				`	"On second thought, I'll pass."`
+					goto scat
+			
+			action
+				event "ip_sw_5"
+				payment -13000
+			`	The unsavory paint vendor lears at you and exchanges your money for a cart full of heavy-duty paint. Back at the <ship>, you carefully apply your new finish until it ends up looking like a perfectly normal merchant ship.`
+				decline
+			
+			label bargain_blue
+			branch scat
+				random < 30
+			
+			action
+				event "ip_sw_5"
+				payment -10000
+			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the bright blues of an innocuous merchant.`
+				decline
+
+			label pirate
+			`	The man behind the counter slides you a can of dark red paint. "Well, kid, can't say ye'll last long flyin' these colors. But a brave captain like you might have a chance."`
+			scene "paint/Pirate"
+			`	"This'll cost you 21000 credits total. It's rather hard to obtain, after all."`
+			choice
+				`	"Sounds good to me."`
+					to display
+						credits >= 21000
+				`	"That's a rip-off. I'm not paying more than 15000 credits."`
+					to display
+						credits >= 15000
+					goto bargain_pirate
+				`	"Can I see the Merchant Traditional instead?"`
+					goto blue
+				`	"Can I see the Pure Red instead?"`
+					goto pure
+				`	"Can I see the Faded Red instead?"`
+					goto faded
+				`	"Can I see the Dirty Green instead?"`
+					goto green
+				`	"On second thought, I'll pass."`
+					goto scat
+			
+			action
+				event "ip_sw_6"
+				payment -21000
+			`	The paint salesman grins and starts passing you paint cans, throwing in a complementary paint roller that probably cost about 3 credits to manufacture. Back at the <ship>, you carefully apply your new finish until it ends up looking like every other pirate ship around.`
+				decline
+
+			label bargain_pirate
+			branch scat
+				random < 40
+
+			action
+				event "ip_sw_5"
+				payment -15000
+			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the dark reds of a daring pirate.`
+				decline
+
+			label pure
+			`	The man behind the counter gestures to the bright red paint on the shelf behind him. "'ere it is. Ye want it? It'll cost you, that's for sure."`
+			scene "paint/Pure Red"
+			`	"Gimme 26000 credits and I'll give you enough of this stuff to paint your ship."`
+			choice
+				`	(Pay him.)`
+					to display
+						credits >= 26000
+				`	"No way. I'll pay 17000 credits."`
+					to display
+						credits >= 17000
+					goto bargain_pure
+				`	"Can I see the Merchant Traditional instead?"`
+					goto blue
+				`	"Can I see the Pirate Traditional instead?"`
+					goto pirate
+				`	"Can I see the Faded Red instead?"`
+					goto faded
+				`	"Can I see the Dirty Green instead?"`
+					goto green
+				`	"On second thought, I'll pass."`
+					goto scat
+			
+			action
+				event "ip_sw_7"
+				payment -26000
+			`	Surprisingly, the unsavory character is generous enough to help you carry your newly bought paint back to your ship, where you layer on coat after coat and end up with a bright red finish. This ought to catch the Navy's eye!`
+				decline
+
+			label bargain_pure
+			branch scat
+				random < 50
+
+			action
+				event "ip_sw_7"
+				payment -17000
+			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the bright reds of a bleeding salamander.`
+				decline
+
+			label faded
+			`	The man behind rolls a small can of red paint across the counter to you. "You shouldn't need much of this stuff, but it ain't cheap."`
+			scene "paint/Faded Red"
+			`	"I'll give you 22000 credits and that's cutting my own throat."`
+			choice
+				`	"22000 credits will do just fine."`
+					to display
+						credits >= 22000
+				`	"Cutting your own throat with credit chips, maybe. I'll give you 16000 and not a credit more."`
+					to display
+						credits >= 16000
+					goto bargain_faded
+				`	"Can I see the Merchant Traditional instead?"`
+					goto blue
+				`	"Can I see the Pirate Traditional instead?"`
+					goto pirate
+				`	"Can I see the Pure Red instead?"`
+					goto pure
+				`	"Can I see the Dirty Green instead?"`
+					goto green
+				`	"On second thought, I'll pass."`
+					goto scat
+			
+			action
+				event "ip_sw_8"
+				payment -22000
+			`	With instructions to layer the paint lightly, the salesman hands you a basket of paint cans light enough to carry back to the <ship> without difficulty. A couple hours later, you end up with a faded red paint job.`
+				decline
+
+			label bargain_faded
+			branch scat
+				random < 40
+
+			action
+				event "ip_sw_8"
+				payment -16000
+			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the faded reds of an embarassed sheep.`
+				decline
+
+			label green
+			branch green_failure
+				"combat rating" < 148
+			
+			`	"Ah, so yer one of those rookie mercs then, I see," the scuzzy storekeeper says as he tosses you a can of paint.`
+			scene "paint/Yellow Inversion"
+			`	"For most folk, this stuff would cost about 40 grand. For you, I'll do 30."`
+			choice
+				`	(Pay him 30000 credits.)`
+					to display
+						credits >= 30000
+				`	"I'll pay 20000."`
+					to display
+						credits >= 20000
+					goto bargain_green
+				`	"Can I see the Merchant Traditional instead?"`
+					goto blue
+				`	"Can I see the Pirate Traditional instead?"`
+					goto pirate
+				`	"Can I see the Pure Red instead?"`
+					goto pure
+				`	"Can I see the Faded Red instead?"`
+					goto faded
+				`	"On second thought, I'll pass."`
+					goto scat
+			
+			action
+				event "ip_sw_yellow_inv"
+				payment -30000
+			`	The man behind the counter saddles you with enough green paint to put an algae bloom to shame. After a couple trips back to your ship and a few hours with a brush and roller, the <ship> is decked out with a dirty green paint job.`
+				decline
+
+			label bargain_green
+			branch scat
+				random < 60
+
+			action
+				event "ip_sw_yellow_inv"
+				payment -20000
+			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the muddy green of an army surplus cow pasture.`
+				decline
+
+			label green_failure
+			`	The man laughs heartily. "Oh, you kids make know how to make an old man laugh, donya? Even rookie mercs have more experience then you. Come back after you've shot up a few ships and maybe we'll talk. But for now -" he pauses, handing you a can of merchant-blue paint "- I think this is what yer lookin' for. On the house."`
+
+			action
+				event "ip_sw_5"
+			
+			`	Abashed, you return to your ship to find that someone else has just applied a fresh coat of blue paint to it. It looks like you're not getting your warpaint today after all.`
+				decline
+
+			
+			label scat
+			`	"Whydonya scat, then?" he replies, turning back to his book.`
+			`	After one more glance at the dump of a store, you leave.`
+				decline
