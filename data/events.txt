@@ -1,0 +1,155 @@
+# Interstellar Paint: A reswizzling plugin for Endless Sky.
+# Copyright (c) 2026 by mOctave
+#
+# This program is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+# This file contains the events that do the actual repainting
+
+event "ip_sw_0"
+	government Escort
+		swizzle 0
+
+event "ip_sw_1"
+	government Escort
+		swizzle 1
+
+event "ip_sw_2"
+	government Escort
+		swizzle 2
+
+event "ip_sw_3"
+	government Escort
+		swizzle 3
+
+event "ip_sw_4"
+	government Escort
+		swizzle 4
+
+event "ip_sw_5"
+	government Escort
+		swizzle 5
+
+event "ip_sw_6"
+	government Escort
+		swizzle 6
+
+event "ip_sw_7"
+	government Escort
+		swizzle 7
+
+event "ip_sw_8"
+	government Escort
+		swizzle 8
+
+event "ip_sw_9"
+	government Escort
+		swizzle 9
+
+event "ip_sw_10"
+	government Escort
+		swizzle 10
+
+event "ip_sw_11"
+	government Escort
+		swizzle 11
+
+event "ip_sw_12"
+	government Escort
+		swizzle 12
+
+event "ip_sw_13"
+	government Escort
+		swizzle 13
+
+event "ip_sw_14"
+	government Escort
+		swizzle 14
+
+event "ip_sw_15"
+	government Escort
+		swizzle 15
+
+event "ip_sw_16"
+	government Escort
+		swizzle 16
+
+event "ip_sw_17"
+	government Escort
+		swizzle 17
+
+event "ip_sw_18"
+	government Escort
+		swizzle 18
+
+event "ip_sw_19"
+	government Escort
+		swizzle 19
+
+event "ip_sw_20"
+	government Escort
+		swizzle 20
+
+event "ip_sw_21"
+	government Escort
+		swizzle 21
+
+event "ip_sw_22"
+	government Escort
+		swizzle 22
+
+event "ip_sw_23"
+	government Escort
+		swizzle 23
+
+event "ip_sw_24"
+	government Escort
+		swizzle 24
+
+event "ip_sw_25"
+	government Escort
+		swizzle 25
+
+event "ip_sw_26"
+	government Escort
+		swizzle 26
+
+event "ip_sw_total_inv"
+	government Escort
+		swizzle "total inversion"
+
+event "ip_sw_magenta_inv"
+	government Escort
+		swizzle "magenta inversion"
+
+event "ip_sw_red_inv"
+	government Escort
+		swizzle "red inversion"
+
+event "ip_sw_yellow_inv"
+	government Escort
+		swizzle "yellow inversion"
+
+event "ip_sw_green_inv"
+	government Escort
+		swizzle "green inversion"
+
+event "ip_sw_cyan_inv"
+	government Escort
+		swizzle "cyan inversion"
+
+event "ip_sw_blue_inv"
+	government Escort
+		swizzle "blue inversion"
+
+event "ip_sw_ghostpaint"
+	government Escort
+		swizzle "ghostpaint"

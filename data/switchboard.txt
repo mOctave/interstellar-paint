@@ -1,0 +1,769 @@
+# Interstellar Paint: A reswizzling plugin for Endless Sky.
+# Copyright (c) 2026 by mOctave
+#
+# This program is free software: you can redistribute it and/or modify it under the
+# terms of the GNU Affero General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License along with
+# this program. If not, see <https://www.gnu.org/licenses/>.
+
+# This file contains a mission, only offered on Omnis planets, that lets you enable any paint at no cost
+
+color "paint job: selected" .5 .875 .5 0.
+color "paint job: unselected" .25 .75 .25 0.
+color "paint job: unavailable" .125 .625 .125 0.
+
+mission "Interstellar Paint: Switchboard"
+	name "Change Paint"
+	description `This world is home to a mysterious vendor of starship paint known for being able to provide any kind of paint imagineable on short notice. Press "Accept" to visit.`
+	color selected "paint job: selected"
+	color unselected "paint job: unselected"
+	color unavailable "paint job: unavailable"
+	job
+	repeat
+	source
+		government "Omnis" "Faction" "Arena"
+	to fail
+		has "Fail Paint Change"
+	on fail
+		clear "Fail Paint Change"
+	on accept
+		set "Fail Paint Change"
+		conversation
+			`Arriving at the paint vendor, you find only a single ancient touchscreen watched over by a million tiny cameras.`
+			label menu_main
+			`	[USER WILL PLEASE SELECT PAINT TYPE], reads the menu on the touchscreen.`
+			choice
+				`	[Unrestricted]`
+					goto menu_unrestricted
+				`	[Outlaw]`
+					goto menu_outlaw
+				`	[Story-Gated]`
+					goto menu_story
+				`	[Reputation-Gated]`
+					goto menu_reputation
+				`	[Traditionally Unobtainable]`
+					goto menu_unobtainable
+				`	[Exit]`
+			
+			`	You press the button labelled "exit" and the screen goes black. Looks like you're not getting a new paint job today after all.`
+
+
+### UNRESTRICTED ###
+
+
+			label menu_unrestricted
+			`	A new menu appears with the words [USER WILL PLEASE SELECT UNRESTRICTED PAINT TO PREVIEW] in bold across the top.`
+			choice
+				`	[Merchant Traditional]`
+					goto preview_5
+				`	[Darkened Blue]`
+					goto preview_12
+				`	[Pure Blue]`
+					goto preview_13
+				`	[Faded Blue]`
+					goto preview_14
+				`	[Darkened Cyan]`
+					goto preview_15
+				`	[Pure Cyan]`
+					goto preview_16
+				`	[Faded Cyan]`
+					goto preview_17
+				`	[Back]`
+					goto menu_main
+	
+			label preview_5
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Merchant"
+			`	[USER SELECTION: MERCHANT TRADITIONAL]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_5"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_12
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Darkened Blue"
+			`	[USER SELECTION: DARKENED BLUE]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_12"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+	
+			label preview_13
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Blue"
+			`	[USER SELECTION: PURE BLUE]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_13"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+	
+			label preview_14
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Blue"
+			`	[USER SELECTION: FADED BLUE]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_14"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+	
+			label preview_15
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Darkened Cyan"
+			`	[USER SELECTION: DARKENED CYAN]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_15"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+	
+			label preview_16
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Cyan"
+			`	[USER SELECTION: PURE CYAN]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_16"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+	
+			label preview_17
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Cyan"
+			`	[USER SELECTION: FADED CYAN]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unrestricted
+
+			action
+				event "ip_sw_17"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+
+### OUTLAW ###
+
+
+			label menu_outlaw
+			`	A new menu appears with the words [USER WILL PLEASE SELECT OUTLAW PAINT TO PREVIEW] in bold across the top.`
+			choice
+				`	[Alpha]`
+					goto preview_1
+				`	[Pirate]`
+					goto preview_6
+				`	[Pure Red]`
+					goto preview_7
+				`	[Faded Red]`
+					goto preview_8
+				`	[Warrior Pink]`
+					goto preview_blue_inv
+				`	[Back]`
+					goto menu_main
+
+			label preview_1
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Alpha"
+			`	[USER SELECTION: ALPHA]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_outlaw
+
+			action
+				event "ip_sw_1"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_6
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pirate"
+			`	[USER SELECTION: PIRATE]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_outlaw
+
+			action
+				event "ip_sw_6"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_7
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Red"
+			`	[USER SELECTION: PURE RED]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_outlaw
+
+			action
+				event "ip_sw_7"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_8
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Red"
+			`	[USER SELECTION: FADED RED]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_outlaw
+
+			action
+				event "ip_sw_8"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_blue_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Blue Inversion"
+			`	[USER SELECTION: WARRIOR PINK]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_outlaw
+
+			action
+				event "ip_sw_blue_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+
+### STORY ###
+
+
+			label menu_story
+			`	A new menu appears with the words [USER WILL PLEASE SELECT STORY-GATED PAINT TO PREVIEW] in bold across the top.`
+			choice
+				`	[Republic Traditional]`
+					goto preview_0
+				`	[Free Worlds Traditional]`
+					goto preview_2
+				`	[Sheragi]`
+					goto preview_3
+				`	[Syndicate Traditional]`
+					goto preview_4
+				`	[Darkened Green]`
+					goto preview_18
+				`	[Pure Green]`
+					goto preview_19
+				`	[Faded Green]`
+					goto preview_20
+				`	[Darkened Magenta]`
+					goto preview_24
+				`	[Pure Magenta]`
+					goto preview_25
+				`	[Faded Magenta]`
+					goto preview_26
+				`	[Muted Sunset]`
+					goto preview_total_inv
+				`	[Forest Green]`
+					goto preview_red_inv
+				`	[Pure Orange]`
+					goto preview_green_inv
+				`	[Back]`
+					goto menu_main
+
+			label preview_0
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Republic"
+			`	[USER SELECTION: REPUBLIC TRADITIONAL]`
+			`	[FEES AND NAVY LICENSE REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_0"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_2
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Free Worlds"
+			`	[USER SELECTION: FREE WORLDS TRADITIONAL]`
+			`	[FEES AND MILITIA LICENSE REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_2"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_3
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Sheragi"
+			`	[USER SELECTION: SHERAGI]`
+			`	[FEES AND RIM ARCH. COMPLETION REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_3"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_4
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Syndicate"
+			`	[USER SELECTION: SYNDICATE TRADITIONAL]`
+			`	[FEES AND SYNDICATE MEMBERSHIP REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_4"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_18
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Darkened Green"
+			`	[USER SELECTION: DARKENED GREEN]`
+			`	[FEES AND MILITIA LICENSE REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_18"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_19
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Green"
+			`	[USER SELECTION: PURE GREEN]`
+			`	[FEES AND MILITIA LICENSE REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_19"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_20
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Green"
+			`	[USER SELECTION: FADED GREEN]`
+			`	[FEES AND MILITIA LICENSE REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_20"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_24
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Darkened Magenta"
+			`	[USER SELECTION: DARKENED MAGENTA]`
+			`	[FEES AND SYNDICATE PROGRESS REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_24"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_25
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Magenta"
+			`	[USER SELECTION: PURE MAGENTA]`
+			`	[FEES AND SYNDICATE PROGRESS REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_25"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_26
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Magenta"
+			`	[USER SELECTION: FADED MAGENTA]`
+			`	[FEES AND SYNDICATE PROGRESS REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_20"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_total_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Total Inversion"
+			`	[USER SELECTION: MUTED SUNSET]`
+			`	[FEES AND SYNDICATE BRANCH COMPLETION REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_total_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_red_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Red Inversion"
+			`	[USER SELECTION: FOREST GREEN]`
+			`	[FEES AND FW BRANCH COMPLETION REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_red_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_green_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Green Inversion"
+			`	[USER SELECTION: PURE ORANGE]`
+			`	[FEES AND REPUBLIC BRANCH COMPLETION REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_story
+
+			action
+				event "ip_sw_green_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+
+### REPUTATION-GATED ###
+
+
+			label menu_reputation
+			`	A new menu appears with the words [USER WILL PLEASE SELECT REPUTATION-GATED PAINT TO PREVIEW] in bold across the top.`
+			choice
+				`	[Pure Black]`
+					goto preview_9
+				`	[Faded Black]`
+					goto preview_10
+				`	[Pure White]`
+					goto preview_11
+				`	[Darkened Yellow]`
+					goto preview_21
+				`	[Pure Yellow]`
+					goto preview_22
+				`	[Faded Yellow]`
+					goto preview_23
+				`	[Dirty Green]`
+					goto preview_yellow_inv
+				`	[Back]`
+					goto menu_main
+
+			label preview_9
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Black"
+			`	[USER SELECTION: PURE BLACK]`
+			`	[FEES AND CR REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_9"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_10
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Black"
+			`	[USER SELECTION: FADED BLACK]`
+			`	[FEES AND CR REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_10"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_11
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure White"
+			`	[USER SELECTION: PURE WHITE]`
+			`	[FEES AND CR REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_11"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_21
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Darkened Yellow"
+			`	[USER SELECTION: DARKENED YELLOW]`
+			`	[FEES AND WEALTH REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_21"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_22
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Pure Yellow"
+			`	[USER SELECTION: PURE YELLOW]`
+			`	[FEES AND WEALTH REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_22"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_23
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Faded Yellow"
+			`	[USER SELECTION: FADED YELLOW]`
+			`	[FEES AND WEALTH REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_23"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_yellow_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Yellow Inversion"
+			`	[USER SELECTION: DIRTY GREEN]`
+			`	[FEES AND CR REQ. WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_reputation
+
+			action
+				event "ip_sw_yellow_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+
+### UNOBTAINABLE ###
+
+
+			label menu_unobtainable
+			`	A new menu appears with the words [USER WILL PLEASE SELECT TRADITIONALLY UNOBTAINABLE PAINT TO PREVIEW] in bold across the top.`
+			choice
+				`	[Deep Blue]`
+					goto preview_magenta_inv
+				`	[Salmonberry]`
+					goto preview_cyan_inv
+				`	[Ghostpaint]`
+					goto preview_ghostpaint
+				`	[Back]`
+					goto menu_main
+
+			label preview_magenta_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Magenta Inversion"
+			`	[USER SELECTION: DEEP BLUE]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unobtainable
+
+			action
+				event "ip_sw_magenta_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_cyan_inv
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Cyan Inversion"
+			`	[USER SELECTION: SALMONBERRY]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unobtainable
+
+			action
+				event "ip_sw_cyan_inv"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
+
+			label preview_ghostpaint
+			`	The following image appears on the screen. It appears to be some sort of preview of what the paint will look like.`
+			scene "paint/Ghostpaint"
+			`	[USER SELECTION: GHOSTPAINT]`
+			`	[FEES WAVED FOR CASTER CLUB MEMBERS]`
+			`	[CONFIRM TRANSACTION?]`
+			choice
+				`	[Yes]`
+				`	[Back]`
+					goto menu_unobtainable
+
+			action
+				event "ip_sw_ghostpaint"
+			
+			`	You confirm the transaction and return to your ship to find it already painted in its new colors.`
+				decline
