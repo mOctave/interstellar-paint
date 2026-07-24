@@ -1,13 +1,14 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: {{your plugin name here}}
-Upstream-Contact: {{your name here}} <{{your email here}}>
-Source: {{your plugin github url here}}
+Upstream-Name: Interstellar Paint
+Upstream-Contact: mOctave <moctave31415@gmail.com>
+Source: https://github.com/mOctave/interstellar-paint
 
 Files: *
-Copyright: {{your name and email again}}
+Copyright: mOctave <moctave31415@gmail.com>
+License: AGPL-3.0-or-later
 
 Files:
+ images/*
  icon*.png
-Copyright: Michael Zahniser <mzahniser@gmail.com>
+Copyright: mOctave <moctave31415@gmail.com>
 License: CC-BY-SA-4.0
-Comment: Update this when you create your plugin's icon!
