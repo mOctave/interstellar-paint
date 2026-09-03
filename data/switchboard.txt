@@ -18,6 +18,11 @@ color "paint job: selected" .5 .875 .5 0.
 color "paint job: unselected" .25 .75 .25 0.
 color "paint job: unavailable" .125 .625 .125 0.
 
+# Government stubs to prevent errors if Omnis is not installed.
+government "Omnis"
+government "Faction"
+government "Arena"
+
 mission "Interstellar Paint: Switchboard"
 	name "Change Paint"
 	description `This world is home to a mysterious vendor of starship paint known for being able to provide any kind of paint imagineable on short notice. Press "Accept" to visit.`
