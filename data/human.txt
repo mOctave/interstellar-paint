@@ -270,3 +270,753 @@ mission "Interstellar Paint: Pirate World"
 			`	"Whydonya scat, then?" he replies, turning back to his book.`
 			`	After one more glance at the dump of a store, you leave.`
 				decline
+
+
+mission "Interstellar Paint: Civilian World"
+	name "Change Paint"
+	description `This spaceport has a Galactic Paint Supply store. If you'd like to visit, press "Accept."`
+	color selected "paint job: selected"
+	color unselected "paint job: unselected"
+	color unavailable "paint job: unavailable"
+	job
+	repeat
+	source
+		government "Republic" "Syndicate" "Free Worlds" "Neutral"
+		not attributes "station"
+	to offer
+		or
+			not "chosen sides"
+			has "main plot completed"
+	to fail
+		has "Fail Paint Change"
+	on fail
+		clear "Fail Paint Change"
+	on accept
+		set "Fail Paint Change"
+		conversation
+			branch intro_urban
+				has "flagship planet attribute: urban"
+			
+			branch intro_rich
+				has "flagship planet attribute: rich"
+
+			branch intro_farming
+				has "flagship planet attribute: farming"
+			
+			`The paint shop is nothing spectacular, just an ordinary building with a sign out front declaring it to be "Galactic Paint Company: The galaxy's #1 paint supplier since 2731." Inside, a young man stands behind a counter sorting cans of polish. As you enter the shop, he looks up and greets you.`
+				goto desc_wares
+			
+			label intro_urban
+			`	The paint shop consists of stacks of ten-litre paint cans surrounded by flashy paper signs advertising ever-more-confusing deals. In the middle of the shop, a middle-aged woman stands behind a polished steel countertop. As you enter the shop, she looks up and greets you.`
+				goto desc_wares
+
+			label intro_rich
+			`	Few places in the galaxy can afford a gold-leaf sign, but this store seems to be one of them. Inside the store, your feet are greeted by a velvet carpet miraculously unstained by the stacks of paint cans dotted around it. At the back of the shop, a bevy of well-dressed employees stands. Upon your entrance, one of them comes forward and greets you.`
+				goto desc_wares
+			
+			label intro_farming
+			`	The paint store on this planet is best described as a shack. It is simple and utilitarian, presided over by a worried-looking young saleswoman who rises from her ricketty chair to greet you as you enter.`
+				goto desc_wares
+			
+			# More intros can be added later, but this should be enough for now
+
+
+			label desc_wares
+			`	"Hello, captain! What can I get for you today? Some nice blue, perhaps? Or, for our more prestigious customers, we have a range of yellow and muted tones.`
+
+			branch planet_republic
+				has "flagship planet government: Republic"
+
+			branch planet_fw
+				has "flagship planet government: Free Worlds"
+
+			branch planet_syndicate
+				has "flagship planet government: Syndicate"
+			
+			branch wares_done
+				0 == 0
+
+			label planet_republic
+			`	"Naturally, we also have the full set of Naval paints if you are a licensed member," the vendor continues, indicating a stack of cans beside the counter.`
+				goto wares_done
+
+			label planet_fw
+			`	"Or, if you're a member of the Militia, we have a variety of greens on offer," the vendor continues, indicating a stack of cans beside the counter.`
+				goto wares_done
+
+			label planet_syndicate
+			`	"Or, of course, there's Syndicated Security's special colors," the vendor continues, indicating a stack of cans beside the counter.`
+				goto wares_done
+
+			label wares_done
+			`	Indeed, a massive board affixed to the counter reads:`
+			`-_| Galactic Paint Company |_-`
+			`       Pick your paint!`
+			label main_menu
+			choice
+				`	(Merchant Traditional)`
+					goto merchant
+				`	(Darkened Blue)`
+					goto dark_blue
+					to display
+						not "flagship planet attribute: frontier"
+				`	(Pure Blue)`
+					goto pure_blue
+					to display
+						or
+							has "flagship planet attribute: deep"
+							has "flagship planet attribute: rim"
+							has "flagship planet attribute: paradise"
+							has "flagship planet attribute: north"
+				`	(Faded Blue)`
+					goto faded_blue
+					to display
+						or
+							has "flagship planet attribute: dirt belt"
+							has "flagship planet attribute: near earth"
+							has "flagship planet attribute: core"
+							has "flagship planet attribute: south"
+				`	(Darkened Cyan)`
+					goto dark_cyan
+					to display
+						not "flagship planet attribute: frontier"
+						or
+							has "flagship planet attribute: deep"
+							has "flagship planet attribute: paradise"
+							has "flagship planet attribute: near earth"
+				`	(Pure Cyan)`
+					goto pure_cyan
+					to display
+						not "flagship planet attribute: frontier"
+						or
+							has "flagship planet attribute: dirt belt"
+							has "flagship planet attribute: core"
+							has "flagship planet attribute: near earth"
+				`	(Faded Cyan)`
+					goto faded_cyan
+					to display
+						not "flagship planet attribute: frontier"
+						or
+							has "flagship planet attribute: north"
+							has "flagship planet attribute: south"
+							has "flagship planet attribute: near earth"
+				`	(Dirty Green)`
+					goto dirty_green
+					to display
+						has "flagship planet attribute: frontier"
+				`	(Faded Black)`
+					goto faded_black
+					to display
+						"combat rating" >= 148
+				`	(Pure White)`
+					goto pure_white
+					to display
+						"combat rating" >= 8103
+						has "flagship planet attribute: urban"
+				`	(Pure Black)`
+					goto pure_black
+					to display
+						"combat rating" >= 442413
+						has "flagship planet attribute: research"
+				`	(Faded Yellow)`
+					goto faded_yellow
+				`	(Pure Yellow)`
+					goto pure_yellow
+					to display
+						has "flagship planet attribute: rich"
+						has "flagship planet attribute: near earth"
+				`	(Darkened Yellow)`
+					goto dark_yellow
+					to display
+						"net worth" >= 100000000
+						has "flagship planet attribute: rich"
+				`	(Militia Traditional)`
+					goto free_worlds
+					to display
+						has "flagship planet government: Free Worlds"
+				`	(Darkened Green)`
+					goto dark_green
+					to display
+						has "flagship planet government: Free Worlds"
+						has "flagship planet attribute: urban"
+				`	(Pure Green)`
+					goto pure_green
+					to display
+						has "flagship planet government: Free Worlds"
+						has "flagship planet attribute: rim"
+				`	(Faded Green)`
+					goto faded_green
+					to display
+						has "flagship planet government: Free Worlds"
+				`	(Forest Green)`
+					goto forest_green
+					to display
+						has "flagship planet government: Free Worlds"
+						has "flagship planet attribute: urban"
+						has "main plot completed"
+				`	(Syndicate Traditional)`
+					goto syndicate
+					to display
+						has "flagship planet government: Syndicate"
+				`	(Darkened Magenta)`
+					goto dark_magenta
+					to display
+						has "flagship planet government: Syndicate"
+						has "flagship planet attribute: urban"
+				`	(Pure Magenta)`
+					goto pure_magenta
+					to display
+						has "flagship planet government: Syndicate"
+						has "flagship planet attribute: core"
+				`	(Faded Magenta)`
+					goto faded_magenta
+					to display
+						has "flagship planet government: Syndicate"
+				`	(Muted Sunset)`
+					goto muted_sunset
+					to display
+						has "flagship planet government: Syndicate"
+						has "flagship planet attribute: urban"
+						has "main plot completed"
+				`	(Navy Traditional)`
+					goto republic
+					to display
+						has "flagship planet government: Republic"
+				`	(Pure Orange)`
+					goto pure_orange
+					to display
+						has "flagship planet government: Republic"
+						has "flagship planet attribute: urban"
+						has "main plot completed"
+				`	"On second thought, I'll pass."`
+
+			label leave
+			`	"Very well then. I'm sorry it didn't work out for you."`
+			`	You leave the store without new paint but with pockets the same weight as when you entered it.`
+				decline
+
+			label fallback
+			`	"Of course. What are you thinking of?"`
+				goto main_menu
+
+			label merchant
+			scene "paint/Merchant"
+			`	"Of course. Merchant Traditional will cost you 7500 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_5"
+				payment -7500
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Starfarer and Bright Cerulean - typical merchant fare.`
+				decline
+
+			label dark_blue
+			scene "paint/Darkened Blue"
+			`	"Of course. Darkened Blue will cost you 12500 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_12"
+				payment -12500
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Dark Navy and Cornflower Shadow - four words you'd never expect to find together outside of a bad novel.`
+				decline
+
+			label pure_blue
+			scene "paint/Pure Blue"
+			`	"Of course. Pure Blue will cost you 10000 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_13"
+				payment -10000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Mariner's Heart and Fallen Queens - two colors that look suspiciously similar to your eye.`
+				decline
+
+			label faded_blue
+			scene "paint/Faded Blue"
+			`	"Of course. Faded Blue will cost you 9000 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_14"
+				payment -9000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Bland Sunset and Gazelle - a sure sign that the person in charge of naming these colors never earned a communications degree.`
+				decline
+
+			label dark_cyan
+			scene "paint/Darkened Cyan"
+			`	"Of course. Darkened Cyan will cost you 13000 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_15"
+				payment -13000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Teal and Hospital-Wall Blue - a paint scheme sure to appeal to overworked doctors everywhere.`
+				decline
+
+			label pure_cyan
+			scene "paint/Pure Cyan"
+			`	"Of course. Pure Cyan will cost you 11000 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_16"
+				payment -11000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Cyan and Battleship Blue - ironic considering you've never seen a blue battleship before in your life.`
+				decline
+
+			label faded_cyan
+			scene "paint/Faded Cyan"
+			`	"Of course. Faded Cyan will cost you 10500 credits. Does that sound reasonable?"`
+			choice
+				`	"Yes."`
+				`	"Never mind. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_17"
+				payment -10500
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Turquoise and Slate Grey - an everpresent reminder that no one can agree how to spell the word graeiy properly.`
+				decline
+
+			# Combat Rating-Gated
+
+			label unqualified_cr
+			`	"I'm sorry, but you don't qualify for that. We only sell it to individuals who have demonstrated a certain level of combat prowess, and your combat rating isn't high enough yet. Could I get you something else instead?"`
+				goto main_menu
+
+			label dirty_green
+			branch unqualified_cr
+				"combat rating" < 148
+
+			scene "paint/Yellow Inversion"
+			`	"Of course. Let me check your combat rating... yes, you qualify. That will be 20000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_yellow_inv"
+				payment -20000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Fifty Shades of Green and Army Crawl - just the right colors to disguise your ship in a dense jungle if the jungle had bits of shiny metal sticking out of it.`
+				decline
+
+			label faded_black
+			branch unqualified_cr
+				"combat rating" < 8103
+
+			scene "paint/Faded Black"
+			`	"Of course. Let me check your combat rating... yes, you qualify. That will be 35000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_10"
+				payment -35000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Hueless and Burnished Aluminum - now, the <ship> looks like someone covered it in newspaper.`
+				decline
+
+			label pure_white
+			branch unqualified_cr
+				"combat rating" < 442413
+
+			scene "paint/Pure White"
+			`	"Of course. Let me check your combat rating... yes, you qualify. That will be 50000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_11"
+				payment -50000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of New Greenland Grey and Aluminum - basically, most of the cans of "paint" seem to really be paint thinner and bleach.`
+				decline
+
+			label pure_black
+			branch unqualified_cr
+				"combat rating" < 24154953
+
+			scene "paint/Pure Black"
+			`	"Of course. Let me check your combat rating... yes, you qualify. That will be 100000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_9"
+				payment -100000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Shadow and Hueless - all told, you receive sixteen types of paint, ranging from "only an interior designer would argue this wasn't black" to "okay, this is definitely gray" to "powered-off LCD in the middle of the Black Forest at night."`
+				decline
+
+			# Net Worth-Gated
+
+			label unqualified_money
+			`	"I'm sorry, but you don't qualify for that. We only sell this range of paints to individuals whose net worth reaches a certain threshold... and I'm afraid that for this particular paint scheme yours doesn't. Could I get you something else instead?"`
+				goto main_menu
+
+			label faded_yellow
+			branch unqualified_money
+				"net worth" < 10000000
+
+			scene "paint/Faded Yellow"
+			`	"Of course. Let me check your financial records... yes, you qualify. That will be 25000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_23"
+				payment -25000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Maize and Yellow Snow - hopefully this will deter children from trying to nibble on your fins like little remoras.`
+				decline
+
+			label pure_yellow
+			branch unqualified_money
+				"net worth" < 100000000
+
+			scene "paint/Pure Yellow"
+			`	"Of course. Let me check your financial records... yes, you qualify. That will be 75000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_22"
+				payment -75000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Limonade and Harvest - near-identical shades of neon yellow that would make any highlighter jealous.`
+				decline
+
+			label dark_yellow
+			branch unqualified_money
+				"net worth" < 1000000000
+
+			scene "paint/Darkened Yellow"
+			`	"Of course. Let me check your financial records... yes, you qualify. That will be 150000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_23"
+				payment -150000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Green Dijon and Khaki - in all, a wide range of colors that sound like they were named by a deuteranope.`
+				decline
+
+			# Free Worlds
+
+			label unqualified_militia
+			`	"Sorry, but we only sell this color to members of the Militia. Can I get you something else instead?"`
+				goto main_menu
+
+			label free_worlds
+			branch unqualified_militia
+				not "license: Militia"
+
+			scene "paint/Free Worlds"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Militia, we'd be happy to offer you a pallet of this paint at cost - that is, 980 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_2"
+				payment -980
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Militia Green and Summer Grass - the perfect paint job for a budding revolutionary.`
+				decline
+
+			label dark_green
+			branch unqualified_militia
+				not "license: Militia"
+
+			scene "paint/Darkened Green"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Militia, we'd be happy to offer you a pallet of Darkened Green paint at a discount - that is, 2300 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_18"
+				payment -2300
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Pine Boughs and Leafy Green - if there's a better way to make the <ship> look like a salad bowl, no one's found it yet.`
+				decline
+
+			label pure_green
+			branch unqualified_militia
+				not "license: Militia"
+
+			scene "paint/Pure Green"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Militia, we'd be happy to offer you a pallet of Pure Green paint at a discount - that is, 2100 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_19"
+				payment -2100
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Leafcutter Ant and Fresh Cut Grass - both of which seem to be plausible highlighter tints.`
+				decline
+
+			label faded_green
+			branch unqualified_militia
+				not "license: Militia"
+
+			scene "paint/Faded Green"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Militia, we'd be happy to offer you a pallet of Faded Green paint at a discount - that is, 1900 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_20"
+				payment -1900
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Winter Moss and White Avocado - both of which seem like potential biohazards.`
+				decline
+
+
+			label forest_green
+			branch unqualified_militia
+				not "license: Militia"
+
+			scene "paint/Red Inversion"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Militia, we'd be happy to offer you a pallet of Forest Green paint at a discount - that is, 6000 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_red_inv"
+				payment -6000
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Deep Avocado and Cut Grass - two names which apparently got jostled around in transport.`
+				decline
+			
+			# Syndicate
+
+			label unqualified_syndicate
+			`	"Ah... sorry, captain, but this paint is reserved for members of Syndicated Security and its associated enterprises. Can I get you something else instead?"`
+				goto main_menu
+
+			label syndicate
+			branch unqualified_syndicate
+				not "event: joined the syndicate"
+
+			scene "paint/Syndicate"
+			`	"One second, let me check the Syndicate database... ah, there you are. And you're covered by the Syndicated Design paint policy, I see, so I can give you this paint for free."`
+			choice
+				`	"Thanks, that would be great!"`
+				`	"May I try something else?"`
+					goto fallback
+
+			action
+				event "ip_sw_4"
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Indigo and Syndicated Tones - a pointed reminder of where your paycheque comes from.`
+				decline
+
+			label dark_magenta
+			branch unqualified_syndicate
+				not "event: joined the syndicate"
+
+			scene "paint/Darkened Magenta"
+			`	"One second, let me check the Syndicate database... ah, there you are. And you're covered by the Syndicated Design paint policy, I see, so I can give you this paint for free."`
+			choice
+				`	"Thanks, that would be great!"`
+				`	"May I try something else?"`
+					goto fallback
+
+			action
+				event "ip_sw_24"
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Dusk and Pinafore - names which suggest a rather odd sort of midnight ball.`
+				decline
+
+			label pure_magenta
+			branch unqualified_syndicate
+				not "event: joined the syndicate"
+
+			scene "paint/Pure Magenta"
+			`	"One second, let me check the Syndicate database... ah, there you are. And you're covered by the Syndicated Design paint policy, I see, so I can give you this paint for free."`
+			choice
+				`	"Thanks, that would be great!"`
+				`	"May I try something else?"`
+					goto fallback
+
+			action
+				event "ip_sw_25"
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Bright Violet and Verbena - exactly the colors most likely to be chosen by an average four-year-old girl.`
+				decline
+
+			label faded_magenta
+			branch unqualified_syndicate
+				not "event: joined the syndicate"
+
+			scene "paint/Faded Magenta"
+			`	"One second, let me check the Syndicate database... ah, there you are. And you're covered by the Syndicated Design paint policy, I see, so I can give you this paint for free."`
+			choice
+				`	"Thanks, that would be great!"`
+				`	"May I try something else?"`
+					goto fallback
+
+			action
+				event "ip_sw_26"
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Cyclamen and Tundra - now you, too, can look like a polar bear caught mid-meal.`
+				decline
+
+			label muted_sunset
+			branch unqualified_syndicate
+				not "event: joined the syndicate"
+
+			scene "paint/Total Inversion"
+			`	"One second, let me check the Syndicate database... ah, there you are. And you're covered by the Syndicated Design paint policy, I see, so I can give you this paint for free."`
+			choice
+				`	"Thanks, that would be great!"`
+				`	"May I try something else?"`
+					goto fallback
+
+			action
+				event "ip_sw_total_inv"
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Deep Marine and Catmint and Tundra - a laid back version of the tried and true Syndicate swizzle.`
+				decline
+		
+			# Republic
+
+			label unqualified_navy
+			`	"Sorry, but we only sell this color to members of the Navy. Can I get you something else instead?"`
+				goto main_menu
+
+			label republic
+			branch unqualified_navy
+				not "license: Navy"
+
+			scene "paint/Republic"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Navy, we'd be happy to offer you a pallet of this paint at cost - that is, 980 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_0"
+				payment -980
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of Tomato Soup and Gold - the quintessential symbol of the Republic Navy.`
+				decline
+
+			label pure_orange
+			branch unqualified_navy
+				not "license: Navy"
+
+			scene "paint/Green Inversion"
+			`	The shopkeeper asks to see your license, then checks over it quickly.`
+			`	"Sorry for the hassle, Captain <last>. Since you're an active member of the Navy, we'd be happy to offer you a pallet of this paint at cost - that is, 1200 credits."`
+			choice
+				`	"Okay."`
+				`	"That's too expensive. How about something else?"`
+					goto fallback
+				`	"Sorry, but that's ridiculous. If that's what paint costs here I'm not buying any."`
+					goto leave
+
+			action
+				event "ip_sw_green_inv"
+				payment -1200
+
+			`	The shopkeeper takes your money and leads you over to a pallet of paint cans. After a little bit of mucking about with the complementary grav trolley, you manage to get them back to your ship, which you paint in shades of True Orange and Peach - better known as orange, orange, and more orange.`
+				decline
