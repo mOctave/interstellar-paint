@@ -1,6 +1,6 @@
 name "Interstellar Paint"
 about "Ever wanted a way to get your ship repainted without annoying fourth wall breaks? Well, here it is: the galaxy's premier paint suppliers are at your fingertips... and they even brought some new swizzles along for the ride."
-version "1.0.0 alpha"
+version "0.1.0"
 authors
 	"mOctave"
 dependencies

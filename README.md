@@ -1,10 +1,5 @@
-# plugin-template
-This repository serves as a basic template to be used when creating a plugin for the game Endless Sky. Fork it and start modding!
+# Interstellar Paint
 
-[Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)
+Ever wanted a way to get your ship repainted without annoying fourth wall breaks? Well, here it is: the galaxy's premier paint suppliers are at your fingertips... and they even brought some new swizzles along for the ride.
 
-
-## Things to do after forking:
-1. Clone your repo locally. You'll want to clone / symlink your repo within the `"plugins"` directory in your "user" directory (which is where Endless Sky writes your pilot savegames). This ensures you can update your local version of Endless Sky without worrying about losing any uncommitted & unpushed data.
-2. Flesh out your content! You can learn about all the different bits of game data in the [Endless Sky wiki](https://github.com/endless-sky/endless-sky/wiki/CreatingPlugins).
-3. [Submit your plugin for distribution](https://github.com/endless-sky/endless-sky/wiki/PluginRepository).
+This plugin is currently in public beta. It may have uncaught errors; use at your own risk.
