@@ -211,7 +211,7 @@ mission "Interstellar Paint: Pirate World"
 			action
 				event "ip_sw_8"
 				payment -16000
-			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the faded reds of an embarassed sheep.`
+			`	The man behind the counter agrees far too readily to your counteroffer - even with the cut he must be making an enormous profit. Nonetheless, you hand over your money and soon your ship is painted in the faded reds of an embarrassed sheep.`
 				decline
 
 			label green
